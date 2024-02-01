@@ -1,0 +1,30 @@
+create table SALESTABLE(Product varchar2(1),Quarter varchar2(3),Region varchar2(25),Sales int);
+insert into SALESTABLE values('A','Q1','Europe','10');
+insert into SALESTABLE values('A','Q1','America','20');
+insert into SALESTABLE values('A','Q2','Europe','20');
+insert into SALESTABLE values('A','Q2','America','50');
+insert into SALESTABLE values('A','Q3','America','20');
+insert into SALESTABLE values('A','Q4','Europe','10');
+insert into SALESTABLE values('A','Q4','America','30');
+insert into SALESTABLE values('B','Q1','Europe','40');
+insert into SALESTABLE values('B','Q1','America','60');
+insert into SALESTABLE values('B','Q2','Europe','20');
+insert into SALESTABLE values('B','Q2','America','10');
+insert into SALESTABLE values('B','Q3','America','20');
+insert into SALESTABLE values('B','Q4','Europe','10');
+insert into SALESTABLE values('B','Q4','America','40');
+SELECT *FROM SALESTABLE;
+
+SELECT Quarter, Region, SUM(SALES)
+From SALESTABLE
+GROUP BY ROLLUP(Quarter,Region);
+
+
+SELECT Quarter, Region, SUM(SALES)
+From SALESTABLE2
+GROUP BY ROLLDOWN (Quarter, Region);
+
+
+SELECT Product, SUM(Sales) from SALESTABLE where Product = 'A' Group by Product;
+
+SELECT Product,SUM(Sales) from SALESTABLE where Product = 'A' AND Region='America' group by Product;
